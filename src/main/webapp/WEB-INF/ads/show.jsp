@@ -3,7 +3,7 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Viewing All The Ads" />
+        <jsp:param name="title" value="Show Ad" />
     </jsp:include>
 </head>
 <body>
@@ -11,14 +11,11 @@
 
 <div class="container">
     <h1>Here Are all the ads!</h1>
-
-    <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
             <h2>${ad.title}</h2>
             <p>${ad.description}</p>
-            <p><a href="ads?id=${ad.id}">Show Ad</a></p>
+            <p>Posted by: <b><a href="/profile?id=${user.id}" target="_blank">${user.username}</a></b></p>
         </div>
-    </c:forEach>
 </div>
 
 </body>
