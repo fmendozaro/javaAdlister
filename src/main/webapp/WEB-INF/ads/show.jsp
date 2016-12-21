@@ -10,11 +10,14 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>Here Are all the ads!</h1>
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
+        <div class="col-md-12">
+            <h1>${ad.title}</h1>
             <p>${ad.description}</p>
             <p>Posted by: <b><a href="/profile?id=${user.id}" target="_blank">${user.username}</a></b></p>
+            <div class="admin-only">
+                <button id="edit-ad" data-ad-id="${ad.id}" class="btn btn-info">Edit</button>
+                <button id="delete-ad" data-ad-id="${ad.id}" class="btn btn-danger">Delete</button>
+            </div>
         </div>
 </div>
 

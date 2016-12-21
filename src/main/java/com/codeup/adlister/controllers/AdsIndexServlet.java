@@ -18,8 +18,10 @@ public class AdsIndexServlet extends HttpServlet {
 
         if(id != null){
             Ad ad = DaoFactory.getAdsDao().getById(Integer.parseInt(id));
-            request.setAttribute("ad", DaoFactory.getAdsDao().getById(Integer.parseInt(id)));
+
+            request.setAttribute("ad", ad);
             request.setAttribute("user", DaoFactory.getUsersDao().findById(ad.getUserId()));
+
             request.getRequestDispatcher("/WEB-INF/ads/show.jsp").forward(request, response);
 
         }
