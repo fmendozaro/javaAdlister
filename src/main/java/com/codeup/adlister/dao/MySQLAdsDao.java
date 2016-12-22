@@ -46,10 +46,15 @@ public class MySQLAdsDao implements Ads {
         PreparedStatement stmt = null;
         String conditions = "";
         if(q != ""){
-            conditions += " WHERE title LIKE '%"+q+"%' OR description LIKE '%"+q+"%'";
+            conditions += " WHERE title LIKE ? OR description LIKE ?";
         }
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads"+conditions);
+            if(q != ""){
+                String nq = "%"+q+"%";
+                stmt.setString(1, nq);
+                stmt.setString(2, nq);
+            }
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {

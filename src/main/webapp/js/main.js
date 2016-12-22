@@ -4,15 +4,18 @@
 "use strict";
 $(document).ready(function(){
 
-    console.log("Howdy");
-
-
     //Events
 
     $("edit-ad").click(function(e){
         e.preventDefault();
-        var id = $(this).data("data-ad-id");
-        window.location("/edit?=id="+id);
+        var id = $(this).data("ad-id");
+        window.location("ads/edit?=id="+id);
+    });
+
+    $("delete-ad").click(function(e){
+        e.preventDefault();
+        var id = $(this).data("ad-id");
+        window.location("ads/delete?=id="+id);
     });
 
 });
