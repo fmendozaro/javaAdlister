@@ -11,14 +11,15 @@
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
-
-        <c:forEach var="ad" items="${ads}">
-            <div class="col-md-6">
-                <h2>${ad.title}</h2>
-                <p>${ad.description}</p>
-                <p><a href="ads?id=${ad.id}">Show Ad</a></p>
-            </div>
-        </c:forEach>
+        <c:if test="${!empty ads}">
+            <c:forEach var="ad" items="${ads}">
+                <div class="col-md-6">
+                    <h2>${ad.title}</h2>
+                    <p>${ad.description}</p>
+                    <p><a href="ads?id=${ad.id}">Show Ad</a></p>
+                </div>
+            </c:forEach>
+        </c:if>
 
     </div>
 
