@@ -10,6 +10,7 @@ public interface Ads {
     List<Ad> all(String q);
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
-    Ad getById(int id);
+    Ad getById(long id);
     List<Ad> getByUserId(Long userId);
+    void updateAd(Ad ad);
 }

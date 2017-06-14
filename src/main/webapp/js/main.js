@@ -6,16 +6,16 @@ $(document).ready(function(){
 
     //Events
 
-    $("edit-ad").click(function(e){
+    $("#edit-ad").click(function(e){
         e.preventDefault();
         var id = $(this).data("ad-id");
-        window.location("ads/edit?=id="+id);
+        window.location = "/ads/edit?id="+id;
     });
 
-    $("delete-ad").click(function(e){
+    $("#delete-ad").click(function(e){
         e.preventDefault();
         var id = $(this).data("ad-id");
-        window.location("ads/delete?=id="+id);
+        window.location = "/ads/delete?id="+id;
     });
 
 });
