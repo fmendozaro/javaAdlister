@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads {
+
     private Connection connection = null;
 
     public MySQLAdsDao(Config config) {
@@ -27,11 +28,11 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Ad getById(int id) {
+    public Ad getById(long id) {
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = ? LIMIT 1");
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 return extractAd(rs);
@@ -106,6 +107,20 @@ public class MySQLAdsDao implements Ads {
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
+    @Override
+    public void updateAd(Ad ad) {
+        try {
+            String updateQuery = "UPDATE ads SET title = ?, description = ? where id = ?";
+            PreparedStatement stmt = connection.prepareStatement(updateQuery);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
         }
     }
 }
