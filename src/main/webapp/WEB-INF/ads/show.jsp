@@ -16,7 +16,10 @@
             <p>Posted by: <b><a href="/profile?id=${user.id}" target="_blank">${user.username}</a></b></p>
             <div class="admin-only">
                 <button id="edit-ad" data-ad-id="${ad.id}" class="btn btn-info">Edit</button>
-                <button id="delete-ad" data-ad-id="${ad.id}" class="btn btn-danger">Delete</button>
+                <form action="/ads/delete" method="POST">
+                    <input type="hidden" name="id" value="${ad.id}" />
+                    <button id="delete-ad" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
 </div>

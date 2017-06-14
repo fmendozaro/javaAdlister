@@ -48,6 +48,7 @@ public class MySQLAdsDao implements Ads {
         String conditions = "";
         if(q != ""){
             conditions += " WHERE title LIKE ? OR description LIKE ?";
+
         }
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads"+conditions);
@@ -121,6 +122,18 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
+        }
+    }
+
+    @Override
+    public void delete(long id) {
+        try {
+            String deleteQry = "DELETE FROM  ads WHERE  id = ?";
+            PreparedStatement stmt = connection.prepareStatement(deleteQry);
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting a new ad.", e);
         }
     }
 }
