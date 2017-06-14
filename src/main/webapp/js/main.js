@@ -12,10 +12,4 @@ $(document).ready(function(){
         window.location = "/ads/edit?id="+id;
     });
 
-    $("#delete-ad").click(function(e){
-        e.preventDefault();
-        var id = $(this).data("ad-id");
-        window.location = "/ads/delete?id="+id;
-    });
-
 });
