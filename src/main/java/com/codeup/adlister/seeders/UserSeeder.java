@@ -8,9 +8,11 @@ import com.codeup.adlister.models.User;
  */
 public class UserSeeder {
     public static void main(String[] args){
-        User user = new User("fer", "fer@mail.com", "pass");
+        User user = new User("admin", "admin@mail.com", "pass");
         DaoFactory.getUsersDao().insert(user);
         user = new User("ana", "ana@mail.com", "pass");
+        DaoFactory.getUsersDao().insert(user);
+        user = new User("fer", "fer@mail.com", "pass");
         DaoFactory.getUsersDao().insert(user);
     }
 }
