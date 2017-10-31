@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by fer on 6/16/17.
  */
-@WebServlet(name = "UploadAdServlet", urlPatterns = "ads/upload")
+@WebServlet(name = "UploadAdServlet", urlPatterns = "/ads/upload")
 public class UploadAdServlet extends HttpServlet {
 
     private static final String SAVE_DIR = "uploadFiles";
