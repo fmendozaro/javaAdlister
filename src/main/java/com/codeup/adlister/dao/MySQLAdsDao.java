@@ -45,13 +45,17 @@ public class MySQLAdsDao implements Ads {
 
     public List<Ad> all(String q) {
         PreparedStatement stmt = null;
+        String query = "SELECT * " +
+                "FROM ads AS a " +
+                "JOIN users AS u ON u.id = a.owner_id";
         String conditions = "";
         if(q != ""){
             conditions += " WHERE title LIKE ? OR description LIKE ?";
 
         }
+        System.out.println(query);
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads"+conditions);
+            stmt = connection.prepareStatement(query + conditions);
             if(q != ""){
                 String nq = "%"+q+"%";
                 stmt.setString(1, nq);
@@ -67,7 +71,7 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO ads(owner_id, title, description) VALUES (?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
@@ -84,7 +88,7 @@ public class MySQLAdsDao implements Ads {
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
             rs.getLong("id"),
-            rs.getLong("user_id"),
+            rs.getLong("owner_id"),
             rs.getString("title"),
             rs.getString("description")
         );
@@ -101,7 +105,7 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> getByUserId(Long userId){
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads where user_id = ?");
+            stmt = connection.prepareStatement("SELECT * FROM ads where owner_id = ?");
             stmt.setString(1, userId.toString());
 
             ResultSet rs = stmt.executeQuery();
